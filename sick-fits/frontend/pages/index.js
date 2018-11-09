@@ -7,6 +7,6 @@ const Home = props => (
 			<a>Sell!</a>
 		</Link>
 	</div>
-)
+);
 
 export default Home;
