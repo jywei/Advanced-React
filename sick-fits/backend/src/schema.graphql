@@ -1,6 +1,7 @@
 # import * from './generated/prisma.graphql'
 
-# Public facing API
+# Public facing APIs
+
 type Mutation {
   createItem(
     title: String,
