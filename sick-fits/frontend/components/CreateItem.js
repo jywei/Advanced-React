@@ -36,12 +36,11 @@ class CreateItem extends Component {
   };
   handleChange = e => {
     const { name, type, value } = e.target;
-    const val = type == 'number' ? parseFloat(value) : value;
+    const val = type === 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
   };
 
   uploadFile = async e => {
-    console.log('uploading file...');
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -52,7 +51,6 @@ class CreateItem extends Component {
       body: data,
     });
     const file = await res.json();
-    console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
@@ -60,7 +58,7 @@ class CreateItem extends Component {
   };
   render() {
     return (
-      <Mutation mutation={CREATE_ITEM_MUTATION} variables ={this.state}>
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
           <Form
             onSubmit={async (e) => {
@@ -73,7 +71,7 @@ class CreateItem extends Component {
               Router.push({
                 pathname: '/item',
                 query: { id: res.data.createItem.id }
-              })
+              });
             }}
           >
             <Error error={error} />
@@ -86,7 +84,6 @@ class CreateItem extends Component {
                     name="file"
                     placeholder="Upload an image"
                     required
-                    value={this.state.image}
                     onChange={this.uploadFile}
                 />
               </label>
