@@ -34,7 +34,7 @@ class CreateItem extends Component {
     largeImage: 'large-dog.jpg',
     price: 3330,
   };
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, type, value } = e.target;
     const val = type == 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
@@ -48,8 +48,8 @@ class CreateItem extends Component {
     data.append('upload_preset', 'sickfits');
 
     const res = await fetch('https://api.cloudinary.com/v1_1/roywjy/image/upload', {
-      mathod: 'POST',
-      body: data
+      method: 'POST',
+      body: data,
     });
     const file = await res.json();
     console.log(file);
