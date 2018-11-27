@@ -12,7 +12,7 @@ const Mutations = {
     return item;
   },
 
-  async updateItem(parent, args, ctx, info) {
+  updateItem(parent, args, ctx, info) {
     // first take a copy of the updates
     const updates = { ...args };
     // remove the ID from the updates
