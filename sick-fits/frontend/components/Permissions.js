@@ -26,7 +26,7 @@ const ALL_USER_QUERY = gql`
 
 const Permissions = (props) => (
   <Query query={ALL_USER_QUERY}>
-  {({data, loading, error}) => console.log(data) || (
+  {({data, loading, error}) => (
     <div>
       <Error error={error} />
       <div>
