@@ -1,13 +1,12 @@
-import CreateItem from '../components/CreateItem';
 import PleaseSignIn from '../components/PleaseSignIn';
 
-const Sell = props => (
+const Permissions = props => (
 	<div>
 		<PleaseSignIn>
-			<CreateItem />
+			<p>Permissions!</p>
 		</PleaseSignIn>
 		
 	</div>
 );
 
-export default Sell;
+export default Permissions;
