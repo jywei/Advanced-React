@@ -3,6 +3,7 @@ import Error from './ErrorMessage';
 import gql from 'graphql-tag';
 import Table from './styles/Table';
 import SickButton from './styles/SickButton';
+import PropTypes from 'prop-types';
 
 const possiblePermissions = [
   'ADMIN',
@@ -37,12 +38,12 @@ const Permissions = (props) => (
               <th>NAME</th>
               <th>EMAIL</th>
               {possiblePermissions.map(permission =>
-                <th>{permission}</th>)}
+                <th key={permission}>{permission}</th>)}
               <th>👇🏻</th>
             </tr>
           </thead>
           <tbody>
-            {data.users.map(user => <User user={user} />)}
+            {data.users.map(user => <UserPermissions user={user} key={user.id} />)}
           </tbody>
         </Table>
       </div>
@@ -51,7 +52,20 @@ const Permissions = (props) => (
   </Query>
 );
 
-class User extends React.Component {
+class UserPermissions extends React.Component {
+  static propTypes = {
+    user: PropTypes.shape({
+      name: PropTypes.string,
+      email: PropTypes.string,
+      id: PropTypes.string,
+      permission: PropTypes.array,
+    }).isRequired,
+  };
+
+  state = {
+    permissions: this.props.user.permissions,
+  };
+
   render() {
     const user = this.props.user;
     return (
