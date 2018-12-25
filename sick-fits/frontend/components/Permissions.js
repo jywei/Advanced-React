@@ -77,7 +77,7 @@ class UserPermissions extends React.Component {
           {user.email}
         </td>
         {possiblePermissions.map(permission => (
-          <td>
+          <td key={permission} >
             <label htmlFor={`${user.id}-permission-${permission}`}>
               <input type="checkbox"/>
             </label>
