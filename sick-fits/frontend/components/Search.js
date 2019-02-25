@@ -58,7 +58,10 @@ class AutoComplete extends React.Component {
             )}
           </ApolloConsumer>
           <DropDown>
-            <p>Item will go here</p>
+            {this.state.items.map(item => <DropDownItem>
+              <img width="50" src={item.image} alt={item.title} />
+              {item.title}
+            </DropDownItem>)}
           </DropDown>
         </div>
       </SearchStyles>
