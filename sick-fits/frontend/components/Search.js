@@ -52,6 +52,7 @@ class AutoComplete extends React.Component {
     });
   }, 350);
   render() {
+    resetIdCounter();
     return(
       <SearchStyles>
         <Downshift onChange={routeToItem} itemToString={item => (item === null ? '' : item.title)}>
