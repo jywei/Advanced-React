@@ -23,6 +23,15 @@ const SEARCH_ITEMS_QUERY = gql`
   }
 `;
 
+function routeToItem(item) {
+  Router.push({
+    pathname: '/item',
+    query: {
+      id: item.id,
+    },
+  });
+}
+
 class AutoComplete extends React.Component {
   state = {
     items: [],
@@ -45,7 +54,7 @@ class AutoComplete extends React.Component {
   render() {
     return(
       <SearchStyles>
-        <Downshift itemToString={item => (item === null ? '' : item.title)}>
+        <Downshift onChange={routeToItem} itemToString={item => (item === null ? '' : item.title)}>
           {({ getInputProps, getItemProps, isOpen, inputValue, highlightedIndex }) => (
             <div>
               <ApolloConsumer>
@@ -56,7 +65,7 @@ class AutoComplete extends React.Component {
                         type: "search",
                         placeholder: "Search For An Item",
                         id: "search",
-                        className: this.state.loading ? 'loading' : '',
+                        className: this.state.loading ? 'loadin g' : '',
                         onChange:
                           (e) => {
                             e.persist();
@@ -79,6 +88,10 @@ class AutoComplete extends React.Component {
                       {item.title}
                     </DropDownItem>
                   ))}
+                  {
+                    !this.state.items.length &&
+                    !this.state.loading && <DropDownItem> Nothing Found {inputValue}</DropDownItem>
+                  }
                 </DropDown>
               )}
             </div>
