@@ -45,27 +45,41 @@ class AutoComplete extends React.Component {
   render() {
     return(
       <SearchStyles>
-        <div>
-          <ApolloConsumer>
-            {(client) => (
-              <input
-                type="search"
-                onChange={(e) => {
-                  e.persist();
-                  this.onChange(e, client);
-                }}
-              />
-            )}
-          </ApolloConsumer>
-          <DropDown>
-            {this.state.items.map(item => (
-              <DropDownItem key={item.id}>
-                <img width="50" src={item.image} alt={item.title} />
-                {item.title}
-              </DropDownItem>
-            ))}
-          </DropDown>
-        </div>
+        <Downshift>
+          {({ getInputProps, getItemProps, isOpen, inputValue, highlightedIndex }) => (
+            <div>
+              <ApolloConsumer>
+                {(client) => (
+                  <input
+                    {...getInputProps(
+                      {
+                        type: "search",
+                        placeholder: "Search For An Item",
+                        id: "search",
+                        className: this.state.loading ? 'loading' : '',
+                        onChange:
+                          (e) => {
+                            e.persist();
+                            this.onChange(e, client);
+                          }
+                      }
+                    )}
+                  />
+                )}
+              </ApolloConsumer>
+              { isOpen && (
+                <DropDown>
+                  {this.state.items.map(item => (
+                    <DropDownItem key={item.id}>
+                      <img width="50" src={item.image} alt={item.title} />
+                      {item.title}
+                    </DropDownItem>
+                  ))}
+                </DropDown>
+              )}
+            </div>
+          )}
+        </Downshift>
       </SearchStyles>
     )
   }
