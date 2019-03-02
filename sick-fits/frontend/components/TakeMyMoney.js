@@ -9,6 +9,20 @@ import calcTotalPrice from '../lib/calcTotalPrice';
 import Error from './ErrorMessage';
 import User, { CURRENT_USER_QUERY } from './User';
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation createOrder($token: String!) {
+    createOrder(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        title
+      }
+    }
+  }
+`;
+
 function totalItems(cart) {
   return cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0);
 }
