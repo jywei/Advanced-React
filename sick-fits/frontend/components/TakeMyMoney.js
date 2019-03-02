@@ -13,7 +13,7 @@ class TakeMyMoney extends React.Component {
   render() {
     return (
       <User>
-        {({ data: { me } }) => <p>Checkout!</p>}
+        {({ data: { me } }) => <p>{this.props.children}</p>}
       </User>
     )
   }
