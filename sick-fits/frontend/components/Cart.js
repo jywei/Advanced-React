@@ -2,8 +2,9 @@ import React from 'react';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { adopt } from 'react-adopt';
-import User from './User';
 import CartItem from './CartItem';
+import TakeMeMoney from './TakeMyMoney';
+import User from './User';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import CartStyles from './styles/CartStyles';
@@ -48,7 +49,9 @@ const Cart = () => (
           </ul>
           <footer>
             <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-            <SickButton>Checkout</SickButton>
+            <TakeMeMoney>
+              <SickButton>Checkout</SickButton>
+            </TakeMeMoney>
           </footer>
         </CartStyles>
       )
