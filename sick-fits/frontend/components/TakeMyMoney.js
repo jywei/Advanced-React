@@ -47,19 +47,27 @@ class TakeMyMoney extends React.Component {
     return (
       <User>
         {
-          ({ data: { me } }) => 
-            <StripeCheckout
-              amount={calcTotalPrice(me.cart)}
-              name="Sick Fits"
-              description={`Order of ${totalItems(me.cart)} items!`}
-              image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
-              stripeKey="pk_test_1Zp32ZrL0wq99kUOJyYQhfbO"
-              currency="USD"
-              email={me.email}
-              token={res => this.onToken(res, createOrder)}
+          ({ data: { me } }) => (
+            <Mutation
+              mutation={CREATE_ORDER_MUTATION}
+              refetchQueries={[{ query: CURRENT_USER_QUERY }]}
             >
-              {this.props.children}
-            </StripeCheckout>
+              {(createOrder) => (
+                <StripeCheckout
+                  amount={calcTotalPrice(me.cart)}
+                  name="Sick Fits"
+                  description={`Order of ${totalItems(me.cart)} items!`}
+                  image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
+                  stripeKey="pk_test_1Zp32ZrL0wq99kUOJyYQhfbO"
+                  currency="USD"
+                  email={me.email}
+                  token={res => this.onToken(res, createOrder)}
+                >
+                  {this.props.children}
+                </StripeCheckout>
+              )}
+            </Mutation>
+          )
         }
       </User>
     )
