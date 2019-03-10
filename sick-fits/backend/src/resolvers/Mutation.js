@@ -305,6 +305,7 @@ const Mutations = {
         quantity: cartItem.quantity,
         user: { connect: { id: userId } },
       };
+      // delete the id because we copied from the original orderItem ID
       delete orderItem.id;
       return orderItem;
     });
