@@ -29,6 +29,21 @@ const Query = {
     // 3. if they do, query all users
     return ctx.db.query.users({}, info);
   },
+
+  async orders(parent, args, ctx, info) {
+    const { userId } = ctx.request;
+    if (!userId) {
+      throw new Error('you must be signed in!');
+    }
+    return ctx.db.query.orders(
+      {
+        where: {
+          user: { id: userId },
+        },
+      },
+      info
+    );
+  },
 };
 
 module.exports = Query;
