@@ -81,7 +81,7 @@ describe('<CreateItem/>', () => {
         result: {
           data: {
             createItem: {
-              ...fakeItem,
+              ...item,
               id: 'abc123',
               __typename: 'Item',
             },
